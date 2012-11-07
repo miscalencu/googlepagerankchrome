@@ -1,0 +1,13 @@
+{
+	"name": "Google Page Rank",
+	"description" : "Gets Google's Page Rank and displays it in the address bar",
+	"version": "0.20",
+	"manifest_version": 2,
+	"options_page": "options.htm",
+	"background": { "page": "background.html" },
+	"description": "Gets Google's Page Rank and displays it in the address bar",
+	"icons": 
+		{
+		"128": "images/icon_128.png"
+		}
+}
