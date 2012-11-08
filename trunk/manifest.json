@@ -8,6 +8,6 @@
 	"description": "Gets Google's Page Rank and displays it in the address bar",
 	"icons": 
 		{
-		"128": "images/icon_128.png"
+		"128": "images/icon_128.png" 
 		}
 }
