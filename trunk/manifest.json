@@ -5,6 +5,7 @@
 	"manifest_version": 2,
 	"options_page": "options.htm",
 	"background": { "page": "background.htm" },
+	"content_security_policy": "script-src 'self' https://toolbarqueries.google.com; object-src 'self'",
 	"description": "Gets Google's Page Rank and displays it in the address bar",
 	"page_action": {
 		"default_icon": "images/icon.png",
@@ -13,5 +14,9 @@
 	"icons": 
 		{
 		"128": "images/icon_128.png" 
-		}
+		},
+	"permissions": [
+	    "tabs",
+		"http://*/"
+	]
 }
