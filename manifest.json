@@ -1,6 +1,6 @@
 {
 	"name": "Lite Page Rank",
-	"description" : "Gets Google's Page Rank and displays it in the address bar",
+	"description" : "Gets Google's Page Rank and displays it in the address bar. Simple.",
 	"version": "0.20",
 	"manifest_version": 2,
 	"options_page": "options.htm",
