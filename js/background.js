@@ -25,15 +25,22 @@ chrome.tabs.onActivated.addListener(function (info) {
     });
 });
 
-var bb;
-
 function getPageRank() {
     if (tabUrl.indexOf("http") == 0) {
-        var h = hash(tabUrl.split("#")[0].split("//")[1]);
-        var url = "http://toolbarqueries.google.com/tbr?client=navclient-auto&ch=8" + h + "&features=Rank&q=info:" + tabUrl.split("//")[1];
-        req.open("GET", url);
-        req.onreadystatechange = gotPageRank;
-        req.send(null);        
+        var url = getBaseUrl(tabUrl);
+        var from_cache = GetFromCache(url);
+        // alert(from_cache);
+        if (from_cache != "") {
+            pageRank = from_cache;
+            FillInfo();
+        }
+        else {
+            var h = hash(url);
+            var request_url = "http://toolbarqueries.google.com/tbr?client=navclient-auto&ch=8" + h + "&features=Rank&q=info:" + url;
+            req.open("GET", request_url);
+            req.onreadystatechange = gotPageRank;
+            req.send(null);
+        }
     }
 }
 
@@ -41,8 +48,17 @@ function gotPageRank() {
     if (req.readyState != 4)
         return;
 
-    if (req.responseText.length < 15) {
-        pageRank = req.responseText.split(":")[2].split("\n")[0];
+    if (req.status != 200)
+        return;
+
+    if (req.responseText != undefined && req.responseText.length < 15) {
+        try { // sometimes Google return a blask result (?!?)
+            pageRank = req.responseText.split(":")[2].split("\n")[0];
+        }
+        catch (ex) {
+            //alert(ex.message + " = " + req.responseText + " = " + tabUrl);
+            pageRank = "-1";
+        }
     } else {
         pageRank = "-1";
     }
@@ -50,6 +66,7 @@ function gotPageRank() {
     if (pageRank == "")
         pageRank = "-1";
 
+    SetToCache(tabUrl, pageRank);
     FillInfo();
 }
 
@@ -62,4 +79,34 @@ function FillInfo() {
     chrome.pageAction.show(tabId);
     chrome.pageAction.setIcon({ path: "images/numbers/icon" + pageRank + ".png", tabId: tabId });
     chrome.pageAction.setTitle({ title: "Google Page Rank is " + pageRank, tabId: tabId });
+}
+
+
+function GetFromCache(url) {
+    for (var i = 0; i < cache.length; i++) {
+        if (cache[i] != null && cache[i].url == url) {
+            return cache[i].pr;
+            break;
+        }
+    }
+    return "";
+}
+
+function SetToCache(url, page_rank) {
+    var element = new Object();
+    element.url = getBaseUrl(url);
+    element.pr = page_rank;
+    cache.unshift(element);
+}
+
+function getBaseUrl(url) {
+    url = url.split("//")[1];
+    url = url.split("#")[0];
+    url = url.split("?")[0];
+
+    if (url.charAt(url.length - 1) == "/") {
+        url.slice(0, -1);
+    }
+
+    return url;
 }
