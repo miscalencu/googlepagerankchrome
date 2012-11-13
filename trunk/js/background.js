@@ -105,7 +105,7 @@ function getBaseUrl(url) {
     url = url.split("?")[0];
 
     if (url.charAt(url.length - 1) == "/") {
-        url.slice(0, -1);
+        url = url.slice(0, -1);
     }
 
     return url;
