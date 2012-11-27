@@ -2,6 +2,8 @@
 	<head>
 		<title>Settings for the Lite Page Rank extension</title>
 		<link href="/css/options.css" media="screen" rel="stylesheet" type="text/css" />
+
+        <script language="javascript" type="text/javascript" src="js/core.js"></script>
 	</head>
 	<body>
 		<img align="middle" border="0" src="images/icon_128.png" alt="Lite Page Rank for Chrome" height="64" title="Lite Page Rank for Chrome" />
@@ -11,8 +13,25 @@
 		<h1>Settings for Lite Page Rank for Chrome extension</h1>
 		<br />
 
-		<b>No settings available yet!</b>
-		<br />
+		<table class="box" cellpadding="5" cellspacing="5" align="left">
+			<tr>
+				<th valign="top" width="250">Show icon when Page Rank is not available:</th>
+				<td>
+                    <input type="checkbox" id="showNA" name="showNA" />
+                </td>
+			</tr>
+			<tr>
+				<th>Icons set:</th>
+				<td>
+					<select name="imgLocation" id="imgLocation">
+                        <option value="transparent">Transparent (default)</option>
+                        <option value="coloured">Coloured</option>
+                    </select>
+                    <div id="preview_icons"></div>
+				</td>
+			</tr>
+        </table>
+        <br clear="all" />
 
         <br />
 		<h1>Stay tuned! Updates to follow soon!</h1>
@@ -21,5 +40,7 @@
 		<b>Please 
 		<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=X465CG6ZUFB82"><img border="0" src="https://www.paypal.com/en_GB/i/btn/btn_donate_SM.gif"align="absmiddle" alt="PayPal - The safer, easier way to pay online." /></a> 
 		if you like my work!</b>
+
+        <script language="javascript" type="text/javascript" src="js/options.js"></script>
 	</body>
 </html>

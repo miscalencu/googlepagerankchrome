@@ -71,14 +71,16 @@ function gotPageRank() {
 }
 
 function FillInfo() {
-    if (pageRank == -1) {
-        chrome.pageAction.hide(tabId);
-        return;
+    if (pageRank == -1) { // NA
+        if (localStorage.showNA == "0") {
+            chrome.pageAction.hide(tabId);
+            return;
+        }
     }    
 
     chrome.pageAction.show(tabId);
-    chrome.pageAction.setIcon({ path: "images/numbers/icon" + pageRank + ".png", tabId: tabId });
-    chrome.pageAction.setTitle({ title: "Google Page Rank is " + pageRank, tabId: tabId });
+    chrome.pageAction.setIcon({ path: "images/numbers/" + localStorage.imgLocation + "/icon" + pageRank + ".png", tabId: tabId });
+    chrome.pageAction.setTitle({ title: "Google Page Rank is " + ((pageRank == -1) ? "not available" : pageRank), tabId: tabId });
 }
 
 

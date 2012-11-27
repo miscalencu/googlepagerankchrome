@@ -69,3 +69,14 @@ input
 	font-weight: bold;
 	cursor: pointer;
 	}
+	
+#preview_icons	
+    {
+    margin-top: 10px;
+    background-color: #F7F7F7;    
+    }
+    
+#preview_icons img
+    {
+    padding: 3px;    
+    }    
